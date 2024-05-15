@@ -1,0 +1,17 @@
+package com.kie_pract.doo;
+
+import java.lang.Number;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+rule "republic day 2024"
+	dialect "mvel"
+	salience 8
+	when
+		f : foo( leaveEndDate == ( LocalDate.parse("2024-01-27") ) , leaveStartDate == f.leaveEndDate , message == null )
+	then
+		modify( f ) {
+				setMessage( "As per Policy holiday and sunday would be considered as leave (suffix to Holiday and prefix to weekend), Would you like to Proceed ahead?" ), 
+				setLeaveCount( 3 )
+		}
+end
